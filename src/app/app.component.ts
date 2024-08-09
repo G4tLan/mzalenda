@@ -2,12 +2,36 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LogoComponent } from './components/logo/logo.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 import { Subject, takeUntil } from 'rxjs';
+import {MatInputModule} from '@angular/material/input';
+import { CommonModule } from '@angular/common';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormsModule} from '@angular/forms';
+
+enum CalendarType {
+  Nswempu,
+  Mampara,
+}
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LogoComponent],
+  imports: [
+    RouterOutlet,
+    LogoComponent,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    CommonModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
@@ -16,6 +40,10 @@ export class AppComponent {
   destroyed = new Subject<void>();
   logoWidth = 300;
   logoHeight = 80;
+  CalendarType = CalendarType;
+  currentCalendar = CalendarType.Nswempu;
+  selectedYear = 2024;
+  years = Array.from({ length: 5 }, (v, k) => 2024 + k);
 
   constructor(breakpointObserver: BreakpointObserver) {
     //use cdk portal to load different screen for larger screens
@@ -48,10 +76,13 @@ export class AppComponent {
       });
   }
 
+  switchCalendar() {
+    this.currentCalendar = (this.currentCalendar + 1)%2;
+  }
+
   xSmallScreen() {
     this.logoWidth = 300;
     this.logoHeight = 80;
-  
   }
 
   smallScreen() {

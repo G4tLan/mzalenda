@@ -1,24 +1,25 @@
 <div class="carousel">
     <!-- slides -->
-    <ul class="carousel-slides">
-        @for (slide of slides; track slide.id; let i = $index) {
-        <li class="carousel-slide" [@slideState]="getAnimationSlideState(i)">
-            <ng-container *ngTemplateOutlet="_carouselSlide.templateRef; context: { $implicit: slide }"></ng-container>
-        </li>
-        }
-    </ul>
-    <ng-content></ng-content>
-    <!-- navigations  -->
-    <div class="carousel-navigations">
-        @if(slides.length > 1 && isNavigationVisible){
-            <button type="button" (click)="select(activeSlides.previous)">
-                <span>left</span>
-            </button>
-        }
-        @if(slides.length > 1 && isNavigationVisible) {
-            <button type="button" (click)="select(activeSlides.next)">
-                <span>right</span>
-            </button>
-        }
-    </div>
+     <div class="carousel-container">
+        <div class="carousel-content">
+            @for (slide of slides; track slide.id; let i = $index) {
+                <div class="carousel-slide"  [style]="getSlideSizing(i)">
+                    <ng-container *ngTemplateOutlet="_carouselSlide.templateRef; context: { $implicit: slide }"></ng-container>
+                </div>
+            }
+        </div>
+        <!-- navigations  -->
+        <div class="carousel-navigator prev" 
+            [class.disabled]="activeSlides.current === 0">
+            <div (click)="select($event, activeSlides.previous)">
+                <mat-icon>chevron_left</mat-icon>
+            </div>
+        </div>
+        <div class="carousel-navigator next" 
+            [class.disabled]="activeSlides.current === slides.length - 1">
+            <div (click)="select($event, activeSlides.next)">
+                <mat-icon>chevron_right</mat-icon>
+            </div>
+        </div>
+     </div>
 </div>

@@ -19,6 +19,7 @@ import {
   OnInit,
   TemplateRef,
 } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 export enum Direction {
   Next,
@@ -50,38 +51,11 @@ export class CarouselSlideDirective {
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
-  animations: [
-    trigger('slideState', [
-      state(
-        'current',
-        style({
-          transform: 'translateX(0%)',
-          zIndex: 1,
-        })
-      ),
-      state(
-        'next',
-        style({
-          transform: 'translateX(100%)',
-          zIndex: 1,
-        })
-      ),
-      state(
-        'previous',
-        style({
-          transform: 'translateX(-100%)',
-          zIndex: 1,
-        })
-      ),
-      transition('current => previous', animate('400ms ease-out')),
-      transition('next => current', animate('400ms ease-out')),
-    ]),
-  ],
+  imports: [CommonModule, MatIconModule],
 })
 export class CarouselComponent implements OnInit, OnDestroy {
   @Input() slides: any;
-  @Input() isNavigationVisible = false;
+  @Input() isNavigationVisible = true;
   @Input() animation: Animation = Animation.Fade;
   @ContentChild(CarouselSlideDirective) _carouselSlide!: CarouselSlideDirective;
 
@@ -119,7 +93,8 @@ export class CarouselComponent implements OnInit, OnDestroy {
     this.cd.detach();
   }
 
-  select(index: number): void {
+  select(event: Event, index: number): void {
+    event.stopPropagation();
     this.activeSlides = this.getPreviousCurrentNextIndexes(index);
     this.direction = this.getDirection(this.activeSlides.current, index);
 
@@ -150,13 +125,13 @@ export class CarouselComponent implements OnInit, OnDestroy {
     };
   }
 
-  getAnimationSlideState(index: number) {
-    return index === this.activeSlides.current
-      ? 'current'
-      : index === this.activeSlides.next
-      ? 'next'
-      : index === this.activeSlides.previous
-      ? 'previous'
-      : '';
+  getSlideSizing(index: number) {
+    let diff = Math.abs(this.activeSlides.current - index);
+    const pad = 5/(diff + 1);
+    if(diff > 0) {
+      return {padding: `0 ${pad}px`, width: `${5/(2**diff)}%`}
+    }
+
+    return {padding: `0 ${pad}px`, width: `90%`};
   }
 }

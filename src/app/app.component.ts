@@ -52,7 +52,7 @@ export class AppComponent {
   selectedYear = 2024;
   years = Array.from({ length: 5 }, (v, k) => 2024 + k);
   animationType = Animation.Slide;
-  slides = Array.from({length: 5}, (v, i) => ({
+  slides = Array.from({length: 12}, (v, i) => ({
     url: `https://picsum.photos/seed/random=${i+1}/200/300`, 
     id: i
   }));

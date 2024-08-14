@@ -11,7 +11,11 @@ import { CommonModule } from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
-import { CarouselComponent,Animation } from './components/carousel/carousel.component';
+import {
+  CarouselComponent,
+  Animation,
+  CarouselSlideDirective,
+} from './components/carousel/carousel.component';
 
 enum CalendarType {
   Nswempu,
@@ -32,7 +36,8 @@ enum CalendarType {
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    CarouselComponent
+    CarouselComponent,
+    CarouselSlideDirective,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

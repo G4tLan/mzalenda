@@ -1,21 +1,47 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, KeyValueDiffer, KeyValueDiffers, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChild,
+  Directive,
+  Input,
+  KeyValueDiffer,
+  KeyValueDiffers,
+  OnDestroy,
+  OnInit,
+  TemplateRef,
+} from '@angular/core';
 
 export enum Direction {
   Next,
-  Prev
+  Prev,
 }
 
 export enum Animation {
   Fade = 'fade',
-  Slide = 'slide'
+  Slide = 'slide',
 }
 
 export interface ActiveSlides {
   previous: number;
   current: number;
   next: number;
+}
+
+@Directive({
+  selector: '[carouselSlide]',
+  standalone: true,
+})
+export class CarouselSlideDirective {
+  constructor(public templateRef: TemplateRef<any>) {}
 }
 
 @Component({
@@ -27,28 +53,37 @@ export interface ActiveSlides {
   imports: [CommonModule],
   animations: [
     trigger('slideState', [
-      state('current', style({
-        transform: 'translateX(0%)',
-        zIndex: 1
-      })),
-      state('next', style({
-        transform: 'translateX(100%)',
-        zIndex: 1
-      })),
-      state('previous', style({
-        transform: 'translateX(-100%)',
-        zIndex: 1
-      })),
+      state(
+        'current',
+        style({
+          transform: 'translateX(0%)',
+          zIndex: 1,
+        })
+      ),
+      state(
+        'next',
+        style({
+          transform: 'translateX(100%)',
+          zIndex: 1,
+        })
+      ),
+      state(
+        'previous',
+        style({
+          transform: 'translateX(-100%)',
+          zIndex: 1,
+        })
+      ),
       transition('current => previous', animate('400ms ease-out')),
       transition('next => current', animate('400ms ease-out')),
-    ])
-  ]
+    ]),
+  ],
 })
-export class CarouselComponent  implements OnInit, OnDestroy {
+export class CarouselComponent implements OnInit, OnDestroy {
   @Input() slides: any;
   @Input() isNavigationVisible = false;
   @Input() animation: Animation = Animation.Fade;
-  @Input() slideTemplateRef!: TemplateRef<any>;
+  @ContentChild(CarouselSlideDirective) _carouselSlide!: CarouselSlideDirective;
 
   differ!: KeyValueDiffer<ActiveSlides, any>;
 
@@ -68,7 +103,10 @@ export class CarouselComponent  implements OnInit, OnDestroy {
     this._activeSlides = activeSlides;
   }
 
-  constructor(private cd: ChangeDetectorRef, private differs: KeyValueDiffers) { }
+  constructor(
+    private cd: ChangeDetectorRef,
+    private differs: KeyValueDiffers
+  ) {}
 
   ngOnInit(): void {
     if (this.slides) {
@@ -108,11 +146,17 @@ export class CarouselComponent  implements OnInit, OnDestroy {
     return {
       previous: (index === 0 ? images.length - 1 : index - 1) % images.length,
       current: index % images.length,
-      next: (index === images.length - 1 ? 0 : index + 1) % images.length
+      next: (index === images.length - 1 ? 0 : index + 1) % images.length,
     };
   }
 
   getAnimationSlideState(index: number) {
-    return index === this.activeSlides.current ? 'current' : index === this.activeSlides.next ? 'next' : index === this.activeSlides.previous ? 'previous' : ''
+    return index === this.activeSlides.current
+      ? 'current'
+      : index === this.activeSlides.next
+      ? 'next'
+      : index === this.activeSlides.previous
+      ? 'previous'
+      : '';
   }
 }

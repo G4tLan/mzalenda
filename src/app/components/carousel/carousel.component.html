@@ -2,11 +2,12 @@
     <!-- slides -->
     <ul class="carousel-slides">
         @for (slide of slides; track slide.id; let i = $index) {
-            <li class="carousel-slide" [@slideState]="getAnimationSlideState(i)">
-                <ng-container *ngTemplateOutlet="slideTemplateRef; context: { $implicit: slide }"></ng-container>
-            </li>
+        <li class="carousel-slide" [@slideState]="getAnimationSlideState(i)">
+            <ng-container *ngTemplateOutlet="_carouselSlide.templateRef; context: { $implicit: slide }"></ng-container>
+        </li>
         }
     </ul>
+    <ng-content></ng-content>
     <!-- navigations  -->
     <div class="carousel-navigations">
         @if(slides.length > 1 && isNavigationVisible){

@@ -1,0 +1,23 @@
+<div class="carousel">
+    <!-- slides -->
+    <ul class="carousel-slides">
+        @for (slide of slides; track slide.id; let i = $index) {
+            <li class="carousel-slide" [@slideState]="getAnimationSlideState(i)">
+                <ng-container *ngTemplateOutlet="slideTemplateRef; context: { $implicit: slide }"></ng-container>
+            </li>
+        }
+    </ul>
+    <!-- navigations  -->
+    <div class="carousel-navigations">
+        @if(slides.length > 1 && isNavigationVisible){
+            <button type="button" (click)="select(activeSlides.previous)">
+                <span>left</span>
+            </button>
+        }
+        @if(slides.length > 1 && isNavigationVisible) {
+            <button type="button" (click)="select(activeSlides.next)">
+                <span>right</span>
+            </button>
+        }
+    </div>
+</div>

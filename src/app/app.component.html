@@ -23,8 +23,24 @@
           Switch to {{CalendarType[(currentCalendar + 1)%2]}} Calendar
         </button>
       </div>
+
+      <div class="app-calendar">
+        <app-carousel [animation]="animationType" [isNavigationVisible]="true" [slides]="slides"
+        [slideTemplateRef]="slidetemplate"></app-carousel>
+      </div>
     </mat-card-content>
     <mat-card-footer >
     </mat-card-footer>
   </mat-card>
 </div>
+
+<ng-template #slidetemplate let-slide>
+	<div [ngStyle]="{
+      'background-size': 'cover',
+      'background-image': 'url(' + slide.url + ')',
+      'background-repeat': 'no-repeat',
+      'width': '100%',
+      'height': '100%'
+    }">
+	</div>
+</ng-template>

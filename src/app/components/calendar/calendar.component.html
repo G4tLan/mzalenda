@@ -22,15 +22,8 @@
 
         <div class="calendar-content">
             <app-carousel [animation]="_animationType" [isNavigationVisible]="true" [data]="_slides">
-                <ng-template carouselSlide let-slideData>
-                    <div [style]="{
-                  'background-size': 'cover',
-                  'background-repeat': 'no-repeat',
-                  'width': '100%',
-                  'height': '100%'
-                }">
-                        <p>{{slideData.name}} - {{slideData.year}}</p>
-                    </div>
+                <ng-template carouselSlide let-slideData let-active="isCurrent">
+                    <app-month [data]="slideData" [active]="active"></app-month>
                 </ng-template>
             </app-carousel>
         </div>

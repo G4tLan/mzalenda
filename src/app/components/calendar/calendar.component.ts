@@ -15,6 +15,7 @@ import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { MonthComponent } from '../month/month.component';
 
 @Component({
   selector: 'app-calendar',
@@ -22,6 +23,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CarouselComponent,
     CarouselSlideDirective,
+    MonthComponent,
     MatCardModule,
     MatButtonModule,
     MatIconModule,

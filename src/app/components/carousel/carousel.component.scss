@@ -16,8 +16,15 @@
 .carousel-slide {
     display: block;
     height: 100%;
-    padding: 0 2px;
-    transition: width var(--timing) ease-out, padding var(--timing) ease-out;
+    display: block;
+    width: 80%;
+    position: absolute;
+    top: 0;
+    left: 10%;
+    transition: left 400ms ease-out, 
+                height 200ms ease-out,
+                z-index 200ms ease-out,
+                top 200ms ease-out;
 }
 
 /* container */

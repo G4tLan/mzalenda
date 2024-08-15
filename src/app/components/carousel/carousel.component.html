@@ -4,7 +4,7 @@
         <div class="carousel-content">
             @for (slide of slides; track slide.id; let i = $index) {
                 <div class="carousel-slide"  [style]="getSlideSizing(i)">
-                    <ng-container *ngTemplateOutlet="_carouselSlide.templateRef; context: { $implicit: slide }"></ng-container>
+                    <ng-container *ngTemplateOutlet="_carouselSlide.templateRef; context: { $implicit: slide, isCurrent: i === activeSlides.current }"></ng-container>
                 </div>
             }
         </div>

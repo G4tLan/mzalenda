@@ -1,0 +1,12 @@
+<app-carousel [animation]="animationType" [isNavigationVisible]="true" [data]="slides">
+    <ng-template carouselSlide let-data>
+        <div [style]="{
+          'background-size': 'cover',
+          'background-repeat': 'no-repeat',
+          'width': '100%',
+          'height': '100%'
+        }">
+        <p>{{data.name}} - {{data.year}}</p>
+        </div>
+    </ng-template>
+</app-carousel>

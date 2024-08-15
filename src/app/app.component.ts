@@ -16,6 +16,8 @@ import {
   Animation,
   CarouselSlideDirective,
 } from './components/carousel/carousel.component';
+import { MonthData, Story } from './interfaces/models';
+import { CalendarComponent } from './components/calendar/calendar.component';
 
 enum CalendarType {
   Nswempu,
@@ -36,8 +38,7 @@ enum CalendarType {
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    CarouselComponent,
-    CarouselSlideDirective,
+    CalendarComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -50,12 +51,17 @@ export class AppComponent {
   CalendarType = CalendarType;
   currentCalendar = CalendarType.Nswempu;
   selectedYear = 2024;
+  breakpoint = Breakpoints.XSmall;
   years = Array.from({ length: 5 }, (v, k) => 2024 + k);
-  animationType = Animation.Slide;
-  slides = Array.from({length: 12}, (v, i) => ({
-    url: `https://picsum.photos/seed/random=${i+1}/200/300`, 
-    id: i
-  }));
+  data: Array<MonthData> = Array.from({length: 12}, (v, i) => new MonthData(
+    `m-${i}`, new Date(2024, i, 12).toLocaleString('default', {month: 'long'}),
+    2024,
+    Array.from({length: 2}, (s,gui) => new Story(`m-${i}-${gui}`,
+      `https://picsum.photos/seed/random=${i+gui+1}/200/300`,
+      "story",
+      ["https://www.sample.com/?crown=building", "http://www.pan.sample.edu/shake/tongue?power=exchange#jeans"]
+    ))
+  ));
 
   constructor(breakpointObserver: BreakpointObserver) {
     //use cdk portal to load different screen for larger screens
@@ -69,11 +75,10 @@ export class AppComponent {
       ])
       .pipe(takeUntil(this.destroyed))
       .subscribe((result) => {
-        const breakpoint = Object.keys(result.breakpoints).filter(
+        this.breakpoint = Object.keys(result.breakpoints).filter(
           (b) => result.breakpoints[b]
         )[0];
-        this.title = breakpoint;
-        switch (breakpoint) {
+        switch (this.breakpoint) {
           case Breakpoints.XSmall:
             return this.xSmallScreen();
           case Breakpoints.Small:

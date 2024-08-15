@@ -2,7 +2,7 @@
     <!-- slides -->
      <div class="carousel-container">
         <div class="carousel-content">
-            @for (slide of slides; track slide.id; let i = $index) {
+            @for (slide of data; track slide.id; let i = $index) {
                 <div class="carousel-slide"  [style]="getSlideSizing(i)">
                     <ng-container *ngTemplateOutlet="_carouselSlide.templateRef; context: { $implicit: slide, isCurrent: i === activeSlides.current }"></ng-container>
                 </div>
@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="carousel-navigator next" 
-            [class.disabled]="activeSlides.current === slides.length - 1">
+            [class.disabled]="activeSlides.current === data.length - 1">
             <div (click)="select($event, activeSlides.next)">
                 <mat-icon>chevron_right</mat-icon>
             </div>

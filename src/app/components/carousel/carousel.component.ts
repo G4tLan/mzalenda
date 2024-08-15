@@ -54,7 +54,7 @@ export class CarouselSlideDirective {
   imports: [CommonModule, MatIconModule],
 })
 export class CarouselComponent implements OnInit, OnDestroy {
-  @Input() slides: any;
+  @Input() data: Array<any> = [];
   @Input() isNavigationVisible = true;
   @Input() animation: Animation = Animation.Fade;
   @ContentChild(CarouselSlideDirective) _carouselSlide!: CarouselSlideDirective;
@@ -83,7 +83,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    if (this.slides) {
+    if (this.data.length > 0) {
       this.activeSlides = this.getPreviousCurrentNextIndexes(0);
       this.differ = this.differs.find(this.activeSlides).create();
     }
@@ -104,7 +104,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
   }
 
   getDirection(oldIndex: number, newIndex: number): Direction {
-    const images = this.slides;
+    const images = this.data;
 
     if (oldIndex === images.length - 1 && newIndex === 0) {
       return Direction.Next;
@@ -116,7 +116,7 @@ export class CarouselComponent implements OnInit, OnDestroy {
   }
 
   getPreviousCurrentNextIndexes(index: number): ActiveSlides {
-    const images = this.slides;
+    const images = this.data;
 
     return {
       previous: (index === 0 ? images.length - 1 : index - 1) % images.length,

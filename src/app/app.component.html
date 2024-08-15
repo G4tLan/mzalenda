@@ -3,32 +3,5 @@
 </div>
 
 <div>
-  <mat-card class="app-card {{CalendarType[currentCalendar] | lowercase}}" appearance="raised">
-    <mat-card-header class="app-card-header">
-      <mat-card-title class="{{CalendarType[currentCalendar] | lowercase}}">
-        <mat-form-field class="app-form-field">
-          <mat-select  [(ngModel)]="selectedYear" class="app-select">
-            @for (year of years; track year) {
-              <mat-option [value]="year">{{year}}</mat-option>
-            }
-          </mat-select>
-        </mat-form-field>
-        {{CalendarType[currentCalendar]}} Calendar
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="app-switch-button">
-        <button mat-fab extended (click)="switchCalendar()" class="{{CalendarType[(currentCalendar + 1)%2] | lowercase}}">
-          <mat-icon>change_circle</mat-icon>
-          Switch to {{CalendarType[(currentCalendar + 1)%2]}} Calendar
-        </button>
-      </div>
-
-      <div class="app-calendar">
-        <app-calendar [data]="data" [screenSize]="breakpoint"> </app-calendar>
-      </div>
-    </mat-card-content>
-    <mat-card-footer >
-    </mat-card-footer>
-  </mat-card>
+  <app-calendar [data]="data" [screenSize]="breakpoint"> </app-calendar>
 </div>

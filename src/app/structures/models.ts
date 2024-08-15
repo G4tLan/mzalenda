@@ -17,9 +17,9 @@ export class Story {
     id: String;
     stories: Array<Story>;
     name: String;
-    year: Number;
+    year: number;
 
-    constructor(id:String, name: String, year: Number, stories: Array<Story>) {
+    constructor(id:String, name: String, year: number, stories: Array<Story>) {
       this.id = id;
       this.stories = stories;
       this.year = year;

@@ -11,18 +11,9 @@ import { CommonModule } from '@angular/common';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
-import {
-  CarouselComponent,
-  Animation,
-  CarouselSlideDirective,
-} from './components/carousel/carousel.component';
-import { MonthData, Story } from './interfaces/models';
+import { MonthData, Story } from './structures/models';
 import { CalendarComponent } from './components/calendar/calendar.component';
 
-enum CalendarType {
-  Nswempu,
-  Mampara,
-}
 
 @Component({
   selector: 'app-root',
@@ -30,14 +21,6 @@ enum CalendarType {
   imports: [
     RouterOutlet,
     LogoComponent,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    CommonModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
     CalendarComponent,
   ],
   templateUrl: './app.component.html',
@@ -48,11 +31,7 @@ export class AppComponent {
   destroyed = new Subject<void>();
   logoWidth = 300;
   logoHeight = 80;
-  CalendarType = CalendarType;
-  currentCalendar = CalendarType.Nswempu;
-  selectedYear = 2024;
   breakpoint = Breakpoints.XSmall;
-  years = Array.from({ length: 5 }, (v, k) => 2024 + k);
   data: Array<MonthData> = Array.from({length: 12}, (v, i) => new MonthData(
     `m-${i}`, new Date(2024, i, 12).toLocaleString('default', {month: 'long'}),
     2024,
@@ -91,10 +70,6 @@ export class AppComponent {
             return this.xLargeScreen();
         }
       });
-  }
-
-  switchCalendar() {
-    this.currentCalendar = (this.currentCalendar + 1)%2;
   }
 
   xSmallScreen() {

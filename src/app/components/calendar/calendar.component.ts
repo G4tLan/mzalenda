@@ -11,7 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
@@ -53,7 +53,11 @@ export class CalendarComponent implements OnInit {
     }
   }
 
-  switchCalendar() {
+  onSwitchCalendar() {
     this._currentCalendar = (this._currentCalendar + 1)%2;
+  }
+
+  onSelectYear(event: MatSelectChange) {
+    this._slides = this.data.filter(d => d.year === event.value);
   }
 }

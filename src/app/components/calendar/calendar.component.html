@@ -2,7 +2,7 @@
     <mat-card-header class="calendar-card-header">
         <mat-card-title class="{{CalendarType[_currentCalendar] | lowercase}}">
             <mat-form-field class="calendar-form-field">
-                <mat-select [(ngModel)]="_selectedYear" class="calendar-select">
+                <mat-select (selectionChange)="onSelectYear($event)" [(ngModel)]="_selectedYear" class="calendar-select">
                     @for (year of _years; track year) {
                     <mat-option [value]="year">{{year}}</mat-option>
                     }
@@ -13,14 +13,14 @@
     </mat-card-header>
     <mat-card-content>
         <div class="calendar-switch-button">
-            <button mat-fab extended (click)="switchCalendar()"
+            <button mat-fab extended (click)="onSwitchCalendar()"
                 class="{{CalendarType[(_currentCalendar + 1)%2] | lowercase}}">
                 <mat-icon>change_circle</mat-icon>
                 Switch to {{CalendarType[(_currentCalendar + 1)%2]}} Calendar
             </button>
         </div>
 
-        <div class="calendar">
+        <div class="calendar-content">
             <app-carousel [animation]="_animationType" [isNavigationVisible]="true" [data]="_slides">
                 <ng-template carouselSlide let-slideData>
                     <div [style]="{

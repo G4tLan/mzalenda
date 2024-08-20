@@ -16,20 +16,24 @@
     .month-content {
         width: 100%;
         display: grid;
-        grid-template-columns: 25% 25% 25% 25%;
-        grid-template-rows: 25% 25% 25% 25%;
+        grid-template-columns: repeat(4, calc(0.25*calc(100% - 6px)));
+        grid-template-rows: repeat(4, calc(0.25*calc(100% - 6px)));
         flex: 1 0 90%;
         border: 1px solid;
-        border-radius: 15px;
         border-radius: 10px;
-        background-color: white;
+        background-color: black;
         box-sizing: border-box;
+        align-items: center;
+        justify-items: center;
+        grid-gap: 2px;
 
         .story-image {
-            background-size: 'cover';
-            background-repeat: 'no-repeat';
+            background-size: cover;
+            background-repeat: no-repeat;
             width: 100%;
             height: 100%;
+            border-radius: 10px;
+            box-shadow: inset 0px 0px 2px 1px #000;
         }
 
         .no-stories {
@@ -40,6 +44,7 @@
             justify-content: center;
             font-size: larger;
             font-weight: 500;
+            color: ghostwhite;
         }
     }
 

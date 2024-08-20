@@ -36,8 +36,8 @@ export class AppComponent {
   data: Array<MonthData> = Array.from({length: 12}, (v, i) => new MonthData(
     `m-${i}`, new Date(2024, i, 12).toLocaleString('default', {month: 'long'}),
     2024,
-    Array.from({length: Math.floor(Math.random() * 9)}, (s,gui) => new Story(`m-${i}-${gui}`,
-      `https://picsum.photos/seed/random=${i+gui+1}/200/300`,
+    Array.from({length: Math.floor(Math.random() * 17)}, (s,gui) => new Story(`m-${i}-${gui}`,
+      `https://picsum.photos/seed/random=${i+gui+1}/300/300`,
       "story",
       ["https://www.sample.com/?crown=building", "http://www.pan.sample.edu/shake/tongue?power=exchange#jeans"]
     ))

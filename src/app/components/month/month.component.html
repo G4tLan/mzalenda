@@ -2,8 +2,8 @@
     @if(data) {
         <div class="month-content">
             @if (data.stories.length > 0) {
-                @for(story of data.stories; track story.id) {
-                    <div class="story-image" [style.backgroundImage]="'url(' + story.image + ')'"></div>
+                @for(story of data.stories; track story.id; let i = $index) {
+                    <div class="story-image" [style.backgroundImage]="'url(' + story.image + ')'" [style.gridArea]="_imagePosMap[i]"></div>
                 }
             } @else {
                 <div class="no-stories">No Stories</div>

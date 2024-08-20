@@ -1,4 +1,14 @@
 <div class="month-container" [class.active]="active">
-    <div class="month-content"></div>
+    @if(data) {
+        <div class="month-content">
+            @if (data.stories.length > 0) {
+                @for(story of data.stories; track story.id) {
+                    <div class="story-image" [style.backgroundImage]="'url(' + story.image + ')'"></div>
+                }
+            } @else {
+                <div class="no-stories">No Stories</div>
+            }
+        </div>
+    }
     <div class="month-label"><span>{{data.name}}</span></div>
 </div>

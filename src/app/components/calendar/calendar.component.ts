@@ -51,7 +51,8 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.data) {
-      this._slides = this.data.filter(d => d.year === 2024);
+      this._slides = this.data
+        .filter(d => d.year === 2024);
     }
   }
 

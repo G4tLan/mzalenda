@@ -13,6 +13,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormsModule} from '@angular/forms';
 import { MonthData, Story } from './structures/models';
 import { CalendarComponent } from './components/calendar/calendar.component';
+import { randomInt } from 'crypto';
 
 
 @Component({
@@ -35,7 +36,7 @@ export class AppComponent {
   data: Array<MonthData> = Array.from({length: 12}, (v, i) => new MonthData(
     `m-${i}`, new Date(2024, i, 12).toLocaleString('default', {month: 'long'}),
     2024,
-    Array.from({length: 2}, (s,gui) => new Story(`m-${i}-${gui}`,
+    Array.from({length: Math.floor(Math.random() * 9)}, (s,gui) => new Story(`m-${i}-${gui}`,
       `https://picsum.photos/seed/random=${i+gui+1}/200/300`,
       "story",
       ["https://www.sample.com/?crown=building", "http://www.pan.sample.edu/shake/tongue?power=exchange#jeans"]

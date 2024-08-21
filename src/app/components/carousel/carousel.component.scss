@@ -20,7 +20,8 @@
     width: 80%;
     position: absolute;
     top: 0;
-    left: 10%;
+    left: 50%;
+    transform: translateX(-50%);
     transition: left 400ms ease-out, 
                 height 200ms ease-out,
                 z-index 200ms ease-out,
@@ -33,6 +34,7 @@
     height: 100%;
     display: flex;
     position: relative;
+    justify-content: center;
 }
 
 .carousel-navigator {
@@ -40,7 +42,7 @@
     width: 40px;
     height: 40px;
     top: calc(50% - 20px);
-    z-index: 2;
+    z-index: 3;
     box-sizing: border-box;
     cursor: pointer;
     display: flex;
@@ -73,6 +75,8 @@
 }
 
 .carousel-content {
-    flex: 1 0 80%;
+    flex: 0 0 80%;
     display: flex;
+    position: relative;
+    min-width: 300px;
 }

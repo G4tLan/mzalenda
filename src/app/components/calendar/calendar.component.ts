@@ -42,17 +42,30 @@ export class CalendarComponent implements OnInit {
   @Input() fromYear: number = 1997;
   @Input() toYear: number = (new Date()).getUTCFullYear();
 
-  _slides: any = [];
+  _slides: any[] = [];
   _animationType = Animation.Slide;
   CalendarType = CalendarType;
   _currentCalendar = CalendarType.Nswempu;
+  _breakpoints = Breakpoints;
   _selectedYear = 2024;
   _years = Array.from({ length: this.toYear - this.fromYear + 1 }, (v, k) => this.fromYear + k);
 
   ngOnInit(): void {
     if(this.data) {
-      this._slides = this.data
-        .filter(d => d.year === 2024);
+      const filtered = this.data.filter(d => d.year === this._selectedYear);
+
+      switch (this.screenSize) {
+        case Breakpoints.Small:
+          for (let index = 0; index < filtered.length; index += 2) {
+            this._slides.push({ month1: filtered[index], month2: filtered[index+1]});
+          }
+          console.log(this._slides)
+          break;
+        case Breakpoints.XSmall:
+          default:
+          this._slides = this.data.filter(d => d.year === this._selectedYear);
+          break;
+      }
     }
   }
 

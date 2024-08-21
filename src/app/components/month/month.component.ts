@@ -8,7 +8,7 @@ import { MonthData } from '../../structures/models';
   templateUrl: './month.component.html',
   styleUrl: './month.component.scss',
   host: {
-    "style": "display: block; width: 100%; height: 100%",
+    "style": "display: block; width: 100%; height: 100%; max-width: 300px",
   }
 })
 export class MonthComponent implements OnInit {

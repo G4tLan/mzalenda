@@ -23,7 +23,17 @@
         <div class="calendar-content">
             <app-carousel [animation]="_animationType" [isNavigationVisible]="true" [data]="_slides">
                 <ng-template carouselSlide let-slideData let-active="isCurrent">
-                    <app-month [data]="slideData" [active]="active"></app-month>
+                    <div class="calendar-slide">
+                        <app-month [data]="slideData" [active]="active"></app-month>
+                    </div>
+                    @switch(screenSize) {
+                        <!-- @case (_breakpoints.XSmall) {
+                        } -->
+                        <!-- @case (_breakpoints.Small) {
+                            <app-month [data]="slideData.month1" [active]="active"></app-month>
+                            <app-month [data]="slideData.month2" [active]="active"></app-month>
+                        } -->
+                    }
                 </ng-template>
             </app-carousel>
         </div>

@@ -43,7 +43,7 @@
                                 <app-month [data]="slideData.month4" [active]="active"></app-month>
                                 </div>
                             }
-                            @case (_breakpoints.Large) {
+                            @default {
                                 <div class="calendar-slide twelve">
                                     @for(item of _months(12); track item;){
                                         <app-month [data]="slideData['month'+item]" [active]="active"></app-month>
@@ -57,5 +57,8 @@
         </div>
     </mat-card-content>
     <mat-card-footer>
+      <div class="t-and-c">
+        T&CsDon't take this seriously or you'll get mad.
+      </div> 
     </mat-card-footer>
 </mat-card>

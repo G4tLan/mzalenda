@@ -95,9 +95,49 @@
     margin-top: 25px;
 }
 
-.calendar-slide {
+.calendar-slide-container {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
+
+    .calendar-slide {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+
+        &.dual {
+            justify-content: space-between;
+            max-width: 610px;
+            background-color: black;
+            border-radius: 15px;
+        }
+
+        &.quad {
+            display: grid;
+            justify-content: center;
+            width: 610px;
+            height: 100%;
+            grid-template-columns: repeat(2,300px);
+            grid-template-rows: repeat(2, calc(0.5 * calc(100% - 10px)));
+            grid-gap: 10px;
+            justify-items: center;
+            background-color: black;
+            border-radius: 15px;
+        }
+
+        &.twelve {
+            display: grid;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            max-width: 1010PX;
+            grid-template-columns: repeat(4,calc(0.25 * calc(100% - 30px)));
+            grid-template-rows: repeat(3, calc(0.33 * calc(100% - 20px)));
+            grid-gap: 10px;
+            justify-items: center;
+            border-radius: 15px;
+        }
+    }
 }

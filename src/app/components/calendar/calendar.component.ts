@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, Input, OnInit, signal } from '@angular/core';
 import {
   Animation,
   CarouselComponent,
@@ -34,46 +34,72 @@ import { MonthComponent } from '../month/month.component';
     FormsModule,
   ],
   templateUrl: './calendar.component.html',
-  styleUrl: './calendar.component.scss'
+  styleUrl: './calendar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarComponent implements OnInit {
   @Input() data!: Array<MonthData>;
-  @Input() screenSize: string = Breakpoints.XSmall;
   @Input() fromYear: number = 1997;
   @Input() toYear: number = (new Date()).getUTCFullYear();
+  screenSize = input<string>(Breakpoints.Small);
 
-  _slides: any[] = [];
+  
+  _selectedYear =signal(2024);
+  _carouselHeight = computed(() => {
+    switch (this.screenSize()) {
+      case Breakpoints.Small:
+      case Breakpoints.XSmall:
+        return 400;
+      case Breakpoints.Medium:
+        return 600;
+      default:
+        return 800;
+    }
+  })
+  _slides = computed(() => {
+
+    //data might need to be a signal as well.
+    const filtered = this.data.filter(d => d.year === this._selectedYear());
+    const newSlides = [];
+
+    switch (this.screenSize()) {
+      case Breakpoints.XSmall:
+        return filtered;
+      case Breakpoints.Small:
+        for (let index = 0; index < filtered.length; index += 2) {
+          newSlides.push({ id: index, month1: filtered[index], month2: filtered[index+1]});
+        }
+        return newSlides;
+      case Breakpoints.Medium:
+        for (let index = 0; index < filtered.length; index += 4) {
+          newSlides.push({ 
+            id: index, 
+            month1: filtered[index], 
+            month2: filtered[index+1], 
+            month3: filtered[index+2], 
+            month4: filtered[index+3]
+          });
+        }
+        return newSlides;
+      default:
+        const slides: { [key: string]: any} = { id: 0};
+        for (let index = 0; index < filtered.length; index += 1) {
+            slides[`month${index+1}`] = filtered[index];
+        }
+        return [slides];
+    }
+  });
   _animationType = Animation.Slide;
   CalendarType = CalendarType;
   _currentCalendar = CalendarType.Nswempu;
   _breakpoints = Breakpoints;
-  _selectedYear = 2024;
   _years = Array.from({ length: this.toYear - this.fromYear + 1 }, (v, k) => this.fromYear + k);
+  _months = (l: number) => Array.from({length: l}, (v, k) => k+1);
 
   ngOnInit(): void {
-    if(this.data) {
-      const filtered = this.data.filter(d => d.year === this._selectedYear);
-
-      switch (this.screenSize) {
-        case Breakpoints.Small:
-          for (let index = 0; index < filtered.length; index += 2) {
-            this._slides.push({ month1: filtered[index], month2: filtered[index+1]});
-          }
-          console.log(this._slides)
-          break;
-        case Breakpoints.XSmall:
-          default:
-          this._slides = this.data.filter(d => d.year === this._selectedYear);
-          break;
-      }
-    }
   }
 
   onSwitchCalendar() {
     this._currentCalendar = (this._currentCalendar + 1)%2;
-  }
-
-  onSelectYear(event: MatSelectChange) {
-    this._slides = this.data.filter(d => d.year === event.value);
   }
 }

@@ -57,6 +57,8 @@ export class CarouselComponent implements OnInit, OnDestroy {
   @Input() data: Array<any> = [];
   @Input() isNavigationVisible = true;
   @Input() animation: Animation = Animation.Fade;
+  @Input() width!: number;
+  @Input() height!: number;
   @ContentChild(CarouselSlideDirective) _carouselSlide!: CarouselSlideDirective;
 
   differ!: KeyValueDiffer<ActiveSlides, any>;

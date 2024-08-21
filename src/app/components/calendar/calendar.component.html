@@ -2,7 +2,7 @@
     <mat-card-header class="calendar-card-header">
         <mat-card-title class="{{CalendarType[_currentCalendar] | lowercase}}">
             <mat-form-field class="calendar-form-field">
-                <mat-select (selectionChange)="onSelectYear($event)" [(ngModel)]="_selectedYear" class="calendar-select">
+                <mat-select [(ngModel)]="_selectedYear" class="calendar-select">
                     @for (year of _years; track year) {
                     <mat-option [value]="year">{{year}}</mat-option>
                     }
@@ -21,19 +21,38 @@
         </div>
 
         <div class="calendar-content">
-            <app-carousel [animation]="_animationType" [isNavigationVisible]="true" [data]="_slides">
+            <app-carousel [animation]="_animationType" [isNavigationVisible]="true" [data]="_slides()" [height]="_carouselHeight()">
                 <ng-template carouselSlide let-slideData let-active="isCurrent">
-                    <div class="calendar-slide">
-                        <app-month [data]="slideData" [active]="active"></app-month>
+                    <div class="calendar-slide-container">
+                        @switch(screenSize()) {
+                            @case (_breakpoints.XSmall) {
+                                <div class="calendar-slide">
+                                    <app-month [data]="slideData" [active]="active"></app-month>
+                                </div>
+                            }
+                            @case (_breakpoints.Small) {
+                                <div class="calendar-slide dual">
+                                <app-month [data]="slideData.month1" [active]="active"></app-month>
+                                <app-month [data]="slideData.month2" [active]="active"></app-month>
+                                </div>
+                            }
+                            @case (_breakpoints.Medium) {
+                                <div class="calendar-slide quad">
+                                <app-month [data]="slideData.month1" [active]="active"></app-month>
+                                <app-month [data]="slideData.month2" [active]="active"></app-month>
+                                <app-month [data]="slideData.month3" [active]="active"></app-month>
+                                <app-month [data]="slideData.month4" [active]="active"></app-month>
+                                </div>
+                            }
+                            @case (_breakpoints.Large) {
+                                <div class="calendar-slide twelve">
+                                    @for(item of _months(12); track item;){
+                                        <app-month [data]="slideData['month'+item]" [active]="active"></app-month>
+                                    }
+                                </div>
+                            }
+                        }
                     </div>
-                    @switch(screenSize) {
-                        <!-- @case (_breakpoints.XSmall) {
-                        } -->
-                        <!-- @case (_breakpoints.Small) {
-                            <app-month [data]="slideData.month1" [active]="active"></app-month>
-                            <app-month [data]="slideData.month2" [active]="active"></app-month>
-                        } -->
-                    }
                 </ng-template>
             </app-carousel>
         </div>

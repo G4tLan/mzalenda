@@ -44,7 +44,9 @@ export class CalendarComponent implements OnInit {
   screenSize = input<string>(Breakpoints.Small);
 
   
-  _selectedYear =signal(2024);
+  _selectedYear = signal(2024);
+  _CalendarTypeOptions = [{value: CalendarType.Mampara, label: CalendarType[CalendarType.Mampara]}, {value: CalendarType.Nswempu, label: CalendarType[CalendarType.Nswempu]}];
+  _currentCalendar = signal(this._CalendarTypeOptions[1]);
   _carouselHeight = computed(() => {
     switch (this.screenSize()) {
       case Breakpoints.Small:
@@ -90,16 +92,10 @@ export class CalendarComponent implements OnInit {
     }
   });
   _animationType = Animation.Slide;
-  CalendarType = CalendarType;
-  _currentCalendar = CalendarType.Nswempu;
   _breakpoints = Breakpoints;
   _years = Array.from({ length: this.toYear - this.fromYear + 1 }, (v, k) => this.fromYear + k);
   _months = (l: number) => Array.from({length: l}, (v, k) => k+1);
 
   ngOnInit(): void {
-  }
-
-  onSwitchCalendar() {
-    this._currentCalendar = (this._currentCalendar + 1)%2;
   }
 }

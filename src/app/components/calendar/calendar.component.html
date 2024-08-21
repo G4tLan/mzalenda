@@ -1,6 +1,6 @@
-<mat-card class="calendar-card {{CalendarType[_currentCalendar] | lowercase}}" appearance="raised">
+<mat-card class="calendar-card {{_currentCalendar().label | lowercase}}" appearance="raised">
     <mat-card-header class="calendar-card-header">
-        <mat-card-title class="{{CalendarType[_currentCalendar] | lowercase}}">
+        <mat-card-title class="{{_currentCalendar().label | lowercase}}">
             <mat-form-field class="calendar-form-field">
                 <mat-select [(ngModel)]="_selectedYear" class="calendar-select">
                     @for (year of _years; track year) {
@@ -8,18 +8,17 @@
                     }
                 </mat-select>
             </mat-form-field>
-            {{CalendarType[_currentCalendar]}} Calendar
+            <mat-form-field class="calendar-form-field" [style.width]="'300px'" [style.marginLeft]="'15px'" [style.marginTop]="'15px'">
+                <mat-select [(ngModel)]="_currentCalendar" class="calendar-select">
+                    @for (type of _CalendarTypeOptions; track type.label) {
+                        <mat-option [value]="type">{{type.label}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+            Calendar
         </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <div class="calendar-switch-button">
-            <button mat-fab extended (click)="onSwitchCalendar()"
-                class="{{CalendarType[(_currentCalendar + 1)%2] | lowercase}}">
-                <mat-icon>change_circle</mat-icon>
-                Switch to {{CalendarType[(_currentCalendar + 1)%2]}} Calendar
-            </button>
-        </div>
-
         <div class="calendar-content">
             <app-carousel [animation]="_animationType" [isNavigationVisible]="true" [data]="_slides()" [height]="_carouselHeight()">
                 <ng-template carouselSlide let-slideData let-active="isCurrent">

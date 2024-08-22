@@ -30,8 +30,13 @@ export class AppComponent {
     2024,
     Array.from({length: Math.floor(Math.random() * 17)}, (s,gui) => new Story(`m-${i}-${gui}`,
       `https://picsum.photos/seed/random=${i+gui+1}/300/300`,
-      "story",
-      ["https://www.sample.com/?crown=building", "http://www.pan.sample.edu/shake/tongue?power=exchange#jeans"]
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      (() => {
+        const a = Math.floor(Math.random() * 4);
+        const b = Math.floor(Math.random() * 5) ?? 1;
+
+        return ["https://www.sample.com/?crown=building", "http://www.pan.sample.edu/shake/tongue?power=exchange#jeans", "#MZalenda", "Musi Khawume", "#Hulio Ima"].slice(a,b)
+      })()
     ))
   ));
 

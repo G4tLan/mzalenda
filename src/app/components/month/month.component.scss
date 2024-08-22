@@ -1,3 +1,10 @@
+:host[month="main"] {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 300px
+}
+
 .month-container {
     height: 100%;
     width: 100%;
@@ -26,6 +33,7 @@
         align-items: center;
         justify-items: center;
         grid-gap: 2px;
+        cursor: pointer;
 
         .story-image {
             background-size: cover;
@@ -58,5 +66,76 @@
         font-size: larger;
         font-weight: 500;
         text-transform: uppercase;
+    }
+}
+
+::ng-deep .month-stories-dialog {
+    .mat-mdc-dialog-surface {
+        background-color: honeydew;
+        border: 1px solid black;
+        box-shadow: 0 0 3px black;
+        border-radius: 15px;
+
+        .mat-mdc-dialog-title {
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .mat-mdc-dialog-content {
+            display: flex;
+            justify-content: center;
+            padding: 0;
+
+            .month-stories-container {
+                height: 100%;
+                display: flex;
+                width: calc(100% - 20px);
+                border: 1px solid;
+                border-radius: 10px;
+                background-color: black;
+                box-sizing: border-box;
+                min-height: 350px;
+                max-height: 400px;
+                flex-direction: column;
+                overflow-y: auto;
+
+                .month-stories-story {
+                    background-color: white;
+                    width: 100%;
+                    margin-bottom: 5px;
+                    padding: 10px 5px;
+                    box-shadow: inset 1px 0 5px 0px gray;
+                    box-sizing: border-box;
+
+                    img {
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 10px;
+                        float: left;
+                        margin-right: 5px;
+                    }
+
+                    p {
+                        line-height: normal;
+                        margin-bottom: 0;
+                    }
+
+                    .month-stories-story-links {
+                        display: flex;
+                        width: 100%;
+                        flex-wrap: wrap;
+                        padding-top: 5px;
+
+                        span {
+                            color: blue;
+                            margin-right: 5px;
+                            font-size: 10px;
+                            line-height: normal;
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

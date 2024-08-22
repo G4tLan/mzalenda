@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>{{data.year}} {{data.name | uppercase}} Mampara/Champ</h2>
+<mat-dialog-content class="mat-typography">
+<div class="month-stories-container">
+    @for(story of data.stories; track story.id) {
+        <div class="month-stories-story">
+            
+            <p><img [src]="story.image" alt="story_">{{story.description}}</p>
+            <div class="month-stories-story-links">
+                @for(link of story.links; track link) {
+                    <span>{{link}}</span>
+                }
+            </div>
+        </div>
+    }
+</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button>Add Mampara/Champ</button>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

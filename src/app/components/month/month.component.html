@@ -1,6 +1,6 @@
 <div class="month-container" [class.active]="active">
     @if(data) {
-        <div class="month-content">
+        <div class="month-content" (click)="openDialog(active && data.stories.length > 0, data)">
             @if (data.stories.length > 0) {
                 @for(story of data.stories; track story.id; let i = $index) {
                     <div class="story-image" [style.backgroundImage]="'url(' + story.image + ')'" [style.gridArea]="_imagePosMap[i]"></div>

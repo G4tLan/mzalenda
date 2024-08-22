@@ -2,19 +2,10 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LogoComponent } from './components/logo/logo.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
 import { Subject, takeUntil } from 'rxjs';
-import {MatInputModule} from '@angular/material/input';
-import { CommonModule } from '@angular/common';
-import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormsModule} from '@angular/forms';
 import { MonthData, Story } from './structures/models';
 import { CalendarComponent } from './components/calendar/calendar.component';
-import { randomInt } from 'crypto';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +13,7 @@ import { randomInt } from 'crypto';
   imports: [
     RouterOutlet,
     LogoComponent,
+    MatToolbarModule,
     CalendarComponent,
   ],
   templateUrl: './app.component.html',
@@ -75,26 +67,26 @@ export class AppComponent {
 
   xSmallScreen() {
     this.logoWidth = 300;
-    this.logoHeight = 80;
+    this.logoHeight = 70;
   }
 
   smallScreen() {
-    this.logoWidth = 560;
-    this.logoHeight = 80;
+    // this.logoWidth = 560;
+    // this.logoHeight = 80;
   }
 
   mediumScreen() {
-    this.logoWidth = 900;
-    this.logoHeight = 80;
+    // this.logoWidth = 900;
+    // this.logoHeight = 80;
   }
 
   largeScreen() {
-    this.logoWidth = 1200;
-    this.logoHeight = 90;
+    // this.logoWidth = 1200;
+    // this.logoHeight = 90;
   }
 
   xLargeScreen() {
-    this.logoWidth = 1900;
-    this.logoHeight = 100;
+    // this.logoWidth = 1900;
+    // this.logoHeight = 100;
   }
 }

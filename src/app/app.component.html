@@ -1,7 +1,7 @@
-<div class="app-logo">
-  <app-logo [width]="logoWidth" [height]="logoHeight"></app-logo>
-</div>
+<mat-toolbar class="app-toolbar">
+    <app-logo [width]="logoWidth" [height]="logoHeight" [style.height]="'80px'"></app-logo>
+</mat-toolbar>
 
-<div>
+<div class="app-content">
   <app-calendar [data]="data" [screenSize]="breakpoint"> </app-calendar>
 </div>

@@ -1,6 +1,19 @@
-.app-logo {
-    width: 100%;
-    padding: 20px 0px;
-    display: flex;
-    justify-content: center;
+
+.app-toolbar {
+    box-shadow: 0px 2px 4px 1px dimgrey;
+    height: 80px;
+    position: fixed;
+    z-index: 5;
+    top: 0;
+}
+
+@media (max-width: 599px) {
+    .app-toolbar {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.app-content {
+    margin-top: 80px;
 }

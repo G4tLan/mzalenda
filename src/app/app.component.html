@@ -1,7 +1,12 @@
 <mat-toolbar class="app-toolbar">
+  <a routerLink="/calendar">
     <app-logo [width]="logoWidth" [height]="logoHeight" [style.height]="'80px'"></app-logo>
+  </a>
+  <div class="app-menu-buttons">
+    <button mat-button [routerLink]="['/nominate']">Nominate</button>
+  </div>
 </mat-toolbar>
 
 <div class="app-content">
-  <app-calendar [data]="data" [screenSize]="breakpoint"> </app-calendar>
+  <router-outlet></router-outlet>
 </div>

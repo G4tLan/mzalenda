@@ -14,6 +14,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { Overlay } from '@angular/cdk/overlay';
+import { RouterLink } from '@angular/router';
 
 export interface DialogData {
   stories: Array<Story>;
@@ -109,7 +110,7 @@ export class MonthComponent implements OnInit {
   selector: 'month-stories-dialog',
   templateUrl: 'month-stories-dialog.html',
   standalone: true,
-  imports: [MatDialogModule, CommonModule, MatButtonModule],
+  imports: [MatDialogModule, CommonModule, MatButtonModule, RouterLink],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MonthStoriesDialog {

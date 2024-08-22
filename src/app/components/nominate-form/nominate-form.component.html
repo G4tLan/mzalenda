@@ -1,0 +1,33 @@
+<form action="">
+    <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+    <input hidden (change)="onFileSelected()" #fileInput accept=".jpg,.jpeg,.png" type="file" id="file">
+    <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput></textarea>
+    </mat-form-field>
+    <mat-form-field class="example-chip-list">
+        <mat-label>Links/hashtags</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Enter hashtags or Links">
+          @for (hashtag of _hashtags(); track hashtag) {
+            <mat-chip-row
+              (removed)="remove(hashtag)"
+              [editable]="true"
+              (edited)="edit(hashtag, $event)"
+              [aria-description]="'press enter to edit ' + hashtag"
+            >
+              {{hashtag}}
+              <button matChipRemove [attr.aria-label]="'remove ' + hashtag">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip-row>
+          }
+          <input
+            placeholder="Add hashtags..."
+            [matChipInputFor]="chipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-grid>
+      </mat-form-field>
+</form>

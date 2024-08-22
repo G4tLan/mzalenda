@@ -15,6 +15,6 @@
 </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button>Nominate Mampara/Champ</button>
+  <button mat-button [mat-dialog-close]="true" [routerLink]="['/nominate']">Nominate Mampara/Champ</button>
   <button mat-button mat-dialog-close>Close</button>
 </mat-dialog-actions>

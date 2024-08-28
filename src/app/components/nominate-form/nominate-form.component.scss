@@ -1,0 +1,114 @@
+:host {
+    display: contents;
+}
+
+.nominate-form-container {
+    padding: 20px 10px;
+    border-radius: 15px;
+    border: 1px solid;
+    max-width: 600px;
+    width: 100%;
+    background-color: honeydew;
+    box-sizing: border-box;
+}
+
+.nominate-form {
+    border-radius: 10px;
+    border: 1px solid;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    background-color: ghostwhite;
+    gap: 20px;
+
+    .nominate-form-top {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        align-items: center;
+
+        button {
+            width: 100px;
+            height: 100px;
+            padding: 0;
+            border: 1px dashed;
+            border-radius: 10px;
+            background-color: #e3e3f3;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+
+            ::ng-deep .mdc-button__label {
+                background-color: #d1d8ef6b;
+            }
+        }
+
+        .image.mat-form-field-invalid {
+            button {
+                color: var(--mat-form-field-error-text-color);
+            }
+        }
+
+        input[type="text"] {
+            display: none;
+        }
+
+        .description {
+            flex: 1;
+            min-height: 200px;
+            width: 100%;
+        }
+
+        ::ng-deep .image {
+            .mdc-text-field {
+                padding: 0;
+                background: none;
+
+                .mat-mdc-form-field-flex {
+                    .mat-mdc-form-field-infix {
+                        display: contents;
+                    }
+                }
+
+                .mdc-line-ripple {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .hashtags {
+        margin-bottom: 10px;
+    }
+}
+
+.nominate-form-action {
+    margin-top: 10px;
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}
+
+@media (max-width: 425px) {
+    .nominate-form {
+        .nominate-form-top {
+            flex-direction: column;
+
+            ::ng-deep .image {
+                width: 100%;
+                .mdc-text-field {
+                    .mat-mdc-form-field-focus-overlay {
+                        background: none;
+                    }
+
+                    .mat-mdc-form-field-flex {
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+    }
+}

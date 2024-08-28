@@ -1,33 +1,52 @@
-<form action="">
-    <button type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
-    <input hidden (change)="onFileSelected()" #fileInput accept=".jpg,.jpeg,.png" type="file" id="file">
-    <mat-form-field>
-        <mat-label>Description</mat-label>
-        <textarea matInput></textarea>
-    </mat-form-field>
-    <mat-form-field class="example-chip-list">
-        <mat-label>Links/hashtags</mat-label>
-        <mat-chip-grid #chipGrid aria-label="Enter hashtags or Links">
-          @for (hashtag of _hashtags(); track hashtag) {
-            <mat-chip-row
-              (removed)="remove(hashtag)"
-              [editable]="true"
-              (edited)="edit(hashtag, $event)"
-              [aria-description]="'press enter to edit ' + hashtag"
-            >
-              {{hashtag}}
-              <button matChipRemove [attr.aria-label]="'remove ' + hashtag">
-                <mat-icon>cancel</mat-icon>
-              </button>
-            </mat-chip-row>
-          }
-          <input
-            placeholder="Add hashtags..."
-            [matChipInputFor]="chipGrid"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-            [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="add($event)"
-          />
-        </mat-chip-grid>
+<div class="nominate-form-container">
+  <form action="" class="nominate-form" [formGroup]="_nominationForm" (submit)="onFormSubmit($event)">
+    <div class="nominate-form-top">
+      <mat-form-field class="image">
+        <button type="button" #chooseImage mat-button (click)="fileInput.click()" (blur)="_image.markAsTouched()">Choose Image</button>
+        <input hidden (change)="onFileSelected($event)" #fileInput accept=".jpg,.jpeg,.png" type="file" id="file">
+        <input hidden matInput formControlName="image"/>
+        @if (_image.getError('required')) {
+          <mat-error>Please pick an image of this nominee</mat-error>
+        }
+        @if (_image.getError('sizeExceeded')) {
+          <mat-error>The image size should not exceed 1MB.</mat-error>
+        }
       </mat-form-field>
-</form>
+      <mat-form-field class="description">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+        <mat-hint>Describe the story behind the nomination</mat-hint>
+        @if (_description.getError('required')) {
+          <mat-error>Please enter a full description</mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <mat-form-field class="hashtags">
+      <mat-label>Links/hashtags/trending topic</mat-label>
+      <mat-chip-grid #chipGrid aria-label="Enter hashtags or Links" formControlName="hashtags">
+        @for (hashtag of _hashtags.value; track hashtag) {
+        <mat-chip-row (removed)="remove(hashtag)" [editable]="true" (edited)="edit(hashtag, $event)"
+          [aria-description]="'press enter to edit ' + hashtag">
+          {{hashtag}}
+          <button matChipRemove [attr.aria-label]="'remove ' + hashtag">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+        }
+        <input placeholder="Add hashtags..." [matChipInputFor]="chipGrid"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)" />
+      </mat-chip-grid>
+      @if (_hashtags.getError('noLinks')) {
+        <mat-error>Please enter an associated hashtag</mat-error>
+      }
+      <mat-hint>Press Enter after each entry</mat-hint>
+    </mat-form-field>
+    <button hidden type="submit" #submit></button>
+  </form>
+
+  <div class="nominate-form-action">
+    <button type="button" mat-button>Cancel</button>
+    <button type="button" mat-button (click)="submit.click()">Save</button>
+  </div>
+</div>

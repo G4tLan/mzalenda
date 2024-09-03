@@ -3,10 +3,21 @@
     <app-logo [width]="logoWidth" [height]="logoHeight" [style.height]="'80px'"></app-logo>
   </a>
   <div class="app-menu-buttons">
-    <button mat-button [routerLink]="['/nominate']">Nominate</button>
+    <button mat-button [routerLink]="['/nominees']">Nominees</button>
   </div>
 </mat-toolbar>
 
 <div class="app-content">
   <router-outlet></router-outlet>
+</div>
+
+<div class="app-bottom-navigation">
+  @for (menu of menuItems(); track menu.label) {
+    <div class="app-bottom-navigator" [class.active]="menu.active">
+      <button mat-icon-button [ariaLabel]="menu.label" [routerLink]="[menu.link]" (click)="onMenuItem(menu.icon)">
+        <mat-icon aria-hidden="false" [fontIcon]="menu.icon"></mat-icon>
+      </button>
+      <span>{{menu.label}}</span>
+    </div>
+  }
 </div>

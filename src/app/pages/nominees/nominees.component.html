@@ -1,1 +1,32 @@
-<p>nominees works!</p>
+<div class="nominees-container  mat-typography">
+
+    <h4> $Month$ Nominees</h4>
+
+    <p> <button mat-raised-button>Click here!</button> to nominate someone</p>
+
+    <div class="nominees-list" >
+        @for(nominee of nominees(); track nominee.id) {
+        <div class="container">
+            <div class="story">
+                <div class="description">
+                    <div class="vote">
+                        <img [src]="nominee.story.image" alt="story_">
+                        <button mat-raised-button [matMenuTriggerFor]="voteMenu" class="nominee-mat-menu">Vote</button>
+                        <mat-menu #voteMenu="matMenu">
+                            @for(poll of nominee.pollLinks; track poll.id) {
+                            <a mat-menu-item href="{{poll.link}}" target="_blank">{{poll.social_media}}</a>
+                            }
+                        </mat-menu>
+                    </div>
+                    {{nominee.story.description}}
+                </div>
+                <div class="nominee-story-links">
+                    @for(link of nominee.story.links; track link) {
+                    <span>{{link}}</span>
+                    }
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

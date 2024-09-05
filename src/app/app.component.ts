@@ -1,9 +1,10 @@
-import { Component, signal } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, Inject, OnInit, signal } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot, RouterLink, RouterOutlet } from '@angular/router';
 import { LogoComponent } from './components/logo/logo.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
   title = 'zalendar';
   logoWidth = 300;
   logoHeight = 70;
@@ -34,7 +36,7 @@ export class AppComponent {
       label: 'calendar',
       icon: 'calendar_month',
       link: '/calendar',
-      active: true,
+      active: false,
     },
     {
       label: 'Nominees',
@@ -43,6 +45,13 @@ export class AppComponent {
       active: false,
     },
   ]);
+
+  constructor(private router: Location ) {
+
+    this.onMenuItem(this.menuItems().find(m => m.link === this.router.path())?.icon || "calendar_month");
+  }
+
+  ngOnInit(): void {}
 
   onMenuItem(icon: string) {
     this.menuItems.update((menus) =>

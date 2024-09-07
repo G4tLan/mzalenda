@@ -16,12 +16,11 @@
     display: block;
     height: 100%;
     display: block;
-    width: 80%;
+    width: 100%;
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: left 400ms ease-out, 
+    transform: translateX(0%);
+    transition: transform 400ms ease-out, 
                 height 200ms ease-out,
                 z-index 200ms ease-out,
                 top 200ms ease-out;

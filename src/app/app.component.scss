@@ -43,7 +43,7 @@
     }
 
     .app-content {
-        padding-bottom: 80px;
+        height: calc(100vh - 175px)!important;
     }
 
     .app-bottom-navigation {
@@ -53,6 +53,7 @@
 
 .app-content {
     margin-top: 80px;
+    height: calc(100vh - 100px);
     display: flex;
     justify-content: center;
 }

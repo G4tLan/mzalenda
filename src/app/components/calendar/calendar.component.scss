@@ -138,6 +138,13 @@
     }
 }
 
+
+@media (max-width: 375px) {
+    .calendar-slide {
+        width: 80% !important;
+    }
+}
+
 .t-and-c {
     padding: 15px;
     color: gray;

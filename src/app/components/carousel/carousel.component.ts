@@ -131,19 +131,21 @@ export class CarouselComponent implements OnInit, OnDestroy {
     let diff = this.activeSlides.current - index;
 
     if(diff < 0) {
+      const transform = "translateX(5%)";
       if(diff < -1) {
-        return { left: '55%', height: '80%', top: '10%', zIndex: 1 }
+        return { transform, height: '80%', top: '10%', zIndex: 1 }
       }
-      return { left: '55%', height: '80%', top: '10%', zIndex: 2 }
+      return { transform, height: '80%', top: '10%', zIndex: 2 }
     }
 
     if(diff > 0) {
+      const transform = "translateX(-5%)";
       if(diff > 1) {
-        return { left: '45%', height: '80%', top: '10%', zIndex: 1 }
+        return { transform, height: '80%', top: '10%', zIndex: 1 }
       }
-      return { left: '45%', height: '80%', top: '10%', zIndex: 2 }
+      return { transform, height: '80%', top: '10%', zIndex: 2 }
     }
 
-    return { left: '50%', height: '100%', top: '0%', zIndex: 3 };
+    return { height: '100%', top: '0%', zIndex: 3 };
   }
 }

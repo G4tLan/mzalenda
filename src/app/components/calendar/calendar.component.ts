@@ -11,7 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { MatSelectChange, MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
@@ -51,11 +51,20 @@ export class CalendarComponent implements OnInit {
     switch (this.screenSize()) {
       case Breakpoints.Small:
       case Breakpoints.XSmall:
-        return 400;
-      case Breakpoints.Medium:
-        return 600;
+        return "calc(100vh - 500px)";
       default:
-        return 800;
+        return "calc(100vh - 300px)";
+    }
+  })
+  _carouselMinHeight = computed(() => {
+    switch (this.screenSize()) {
+      case Breakpoints.Small:
+      case Breakpoints.XSmall:
+        return "200px";
+      case Breakpoints.Medium:
+        return "400px";
+      default:
+        return "600px";
     }
   })
   _slides = computed(() => {

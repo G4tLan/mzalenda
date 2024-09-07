@@ -1,10 +1,3 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
@@ -57,8 +50,9 @@ export class CarouselComponent implements OnInit, OnDestroy {
   @Input() data: Array<any> = [];
   @Input() isNavigationVisible = true;
   @Input() animation: Animation = Animation.Fade;
-  @Input() width!: number;
-  @Input() height!: number;
+  @Input() width!: string;
+  @Input() height!: string;
+  @Input() minHeight!: string;
   @ContentChild(CarouselSlideDirective) _carouselSlide!: CarouselSlideDirective;
 
   differ!: KeyValueDiffer<ActiveSlides, any>;

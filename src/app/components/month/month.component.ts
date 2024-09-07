@@ -88,7 +88,7 @@ export class MonthComponent implements OnInit {
       enterAnimationDuration: '350ms',
       exitAnimationDuration: '150ms',
       minWidth: '300px',
-      width: '80%',
+      width: 'calc(100% - 20px)',
       maxWidth: '900px',
       panelClass: "month-stories-dialog",
       scrollStrategy: this.scroll.scrollStrategies.noop(),

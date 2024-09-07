@@ -20,7 +20,7 @@
     </mat-card-header>
     <mat-card-content>
         <div class="calendar-content">
-            <app-carousel [animation]="_animationType" [isNavigationVisible]="true" [data]="_slides()" [height]="_carouselHeight()">
+            <app-carousel [animation]="_animationType" [isNavigationVisible]="true" [data]="_slides()" [height]="_carouselHeight()" [minHeight]="_carouselMinHeight()">
                 <ng-template carouselSlide let-slideData let-active="isCurrent">
                     <div class="calendar-slide-container">
                         @switch(screenSize()) {
